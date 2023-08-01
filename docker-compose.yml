@@ -20,12 +20,12 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_DATABASE: teste
+            MYSQL_DATABASE: gestao-pessoas
             MYSQL_ROOT_PASSWORD: 123456
         networks:
             - docker-rede
         volumes:
-            - ./mariadb/:/var/lib/mysql
+            - ./db/:/var/lib/mysql
         restart: always
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
