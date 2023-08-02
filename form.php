@@ -21,30 +21,41 @@
             <figure></figure>
             <a class="sair" href="login.php">sair</a>
         </header>
-        <form action="" class="cadastro">
+        <form action="./server/functions.php" class="cadastro">
+
+            <input type="hidden" id="input_requisicao" name="requisicao" value="<?= $_REQUEST['id'] ? 'editar' : 'cadastrar' ?>">
+
             <div class="input">
                 <label for="input_nome">Nome:</label>
-                <input type="text" id="input_nome" name="nome" placeholder="Digite um nome">
+                <input type="text" id="input_nome" name="nome" value="<?= $_REQUEST['nome'] ? $_REQUEST['nome'] : '' ?>"placeholder="Digite um nome">
             </div>
             <div class="input">
                 <label for="input_cpf">CPF:</label>
-                <input type="text" id="input_cpf" name="cpf" placeholder="Digite um CPF">
+                <input type="text" id="input_cpf" name="cpf" value="<?= $_REQUEST['cpf'] ? $_REQUEST['cpf'] : '' ?>" placeholder="Digite um CPF">
             </div>
             <div class="input">
                 <label for="input_email">E-mail:</label>
-                <input type="text" id="input_email" name="email" placeholder="Digite um e-mail">
+                <input type="text" id="input_email" name="email" value="<?= $_REQUEST['email'] ?$_REQUEST['email'] : '' ?>" placeholder="Digite um e-mail">
             </div>
             <div class="input">
                 <label for="input_senha">Senha:</label>
-                <input type="password" id="input_senha" name="senha" placeholder="Digite uma senha">
+                <input type="password" id="input_senha" name="senha" value="<?= $_REQUEST['senha'] ? $_REQUEST['senha'] : '' ?>" placeholder="Digite uma senha">
             </div>
 
             <div class="select">
                 <label for="input_status">Status</label>
                 <select name="status" id="input_status">
-                    <option value="">Escolha uma opção</option>
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
+                    <?php
+                        
+                        $statusAtivo = $_REQUEST['status'] == 1 ? true : false;
+                        $statusInativo = $_REQUEST['status'] == 0 ? true : false;
+
+                        $statusVazio = $statusAtivo || $statusInativo ? false : true;
+
+                    ?>
+                    <option value="" selected="<?= $statusVazio ? true : false ?>">Escolha uma opção</option>
+                    <option value="ativo" selected="<?php $statusAtivo ? true : false ?>" >Ativo</option>
+                    <option value="inativo" selected="<?php $statusInativo ? true : false ?>" >Inativo</option>
                 </select>
                 <div class="seta"><img src="images/seta.svg" alt=""></div>
             </div>
