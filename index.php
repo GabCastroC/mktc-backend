@@ -1,23 +1,30 @@
 <?php
-    if(array_key_exists('cadastrado', $_REQUEST)){ 
-        echo <<<HTML
-            <script>
-                alert('Usuário cadastrado com sucesso');
-            </script>
-        HTML;
-    }
 
-    if(array_key_exists('deletado', $_REQUEST)){ 
-        echo <<<HTML
-            <script>
-                alert('Usuário deletado com sucesso');
-            </script>
-        HTML;
+    if(array_key_exists('action', $_REQUEST)){ 
+        $msg;
+        switch($_REQUEST['action']) {
+            case 'cadastrado':
+                $msg = "Usuário cadastrado com sucesso";
+                break;
+            case 'deletado':
+                $msg = "Usuário deletado com sucesso";
+                break;
+            case 'editado':
+                $msg = "Usuário editado com sucesso";
+                break;
+        }
+        
+        if($msg && trim($msg) != "") {
+            echo <<<HTML
+                <script>
+                    alert('{$msg}');
+                </script>
+            HTML;
+        }
+        
     }
-
+    
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,8 +53,6 @@
             <a class="sair" href="login.php">sair</a>
         </header>
 
-        
-
         <ul>
             <li class='titulo'>
                 <div class='texto nome'>Nome</div>
@@ -62,13 +67,15 @@
                 include_once './server/functions.php';
                 $usuarios = listarUsuarios();
                 foreach($usuarios as $usuario) {
+                    $dataFormatada = date("d/m/Y", strtotime($usuario['data_criacao']));
+                    $status = $usuario['status'] == 1 ? 'Ativo' : 'Inativo';
                     echo "
                         <li class='dado'>
                             <div class='texto nome'>{$usuario['nome']}</div>
                             <div class='texto cpf'>{$usuario['cpf']}</div>
                             <div class='texto email'>{$usuario['email']}</div>
-                            <div class='texto data'>{$usuario['data_criacao']}</div>
-                            <div class='texto status'>{$usuario['status']}</div>
+                            <div class='texto data'>{$dataFormatada}</div>
+                            <div class='texto status'>{$status}</div>
                             <div class='editar'>
                                 <a href='form.php?id={$usuario['id']}&cpf={$usuario['cpf']}&nome={$usuario['nome']}&email={$usuario['email']}&dataCriacao={$usuario['data_criacao']}&status={$usuario['status']}&senha={$usuario['senha']}&permissao={$usuario['permissao']}'>
                                     <img src='images/editar.svg'>
@@ -86,9 +93,7 @@
             ?>
         </ul>
         <div class="pagina">
-            <p class="resultado">4 resultados</p>
-            <a href="">Anterior</a>
-            <a href="">Próxima</a>
+            <p class="resultado"><?= count($usuarios)?> resultados</p>
         </div>
         <a href="form.php" class="botao_add">Adicionar novo</a>
     </div>
