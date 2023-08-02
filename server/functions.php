@@ -23,8 +23,15 @@
         $sql = <<< SQL
             SELECT 
                 *
-            FROM  usuario;
+            FROM usuario
         SQL;
+
+        if (array_key_exists('pesquisa', $_REQUEST)) {
+            $nomePesquisa = trim($_REQUEST['pesquisa']);
+            $sql .= <<<SQL
+                 WHERE nome LIKE '%{$nomePesquisa}%'
+            SQL;
+        }
        
         global $conn;
         $dadosUsuarios = $conn->query($sql);
