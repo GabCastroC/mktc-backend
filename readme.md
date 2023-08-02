@@ -44,3 +44,4 @@ Caso você tenha interesse em se aproximar da nossa Stack, usamos:
 - Formatação de dados na listagem (ex.: CPF)
 - Detalhamento de dados do usuário (modal)
 - Paginação de listagem
+- Separação em microserviços
