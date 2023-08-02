@@ -1,3 +1,24 @@
+<?php
+    if(array_key_exists('cadastrado', $_REQUEST)){ 
+        echo <<<HTML
+            <script>
+                alert('Usuário cadastrado com sucesso');
+            </script>
+        HTML;
+    }
+
+    if(array_key_exists('deletado', $_REQUEST)){ 
+        echo <<<HTML
+            <script>
+                alert('Usuário deletado com sucesso');
+            </script>
+        HTML;
+    }
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,34 +49,41 @@
         
 
         <ul>
-<?php
-            include_once './server/functions.php';
-            $usuarios = listarUsuarios();
-            echo "
-                <li class='titulo'>
-                    <div class='texto nome'>Nome</div>
-                    <div class='texto cpf'>CPF</div>
-                    <div class='texto email'>E-MAIL</div>
-                    <div class='texto data'>DATA</div>
-                    <div class='texto status'>STATUS</div>
-                    <div class='editar'></div>
-                    <div class='deletar'></div>
-                </li>
-            ";
-            foreach($usuarios as $usuario) {
-                echo "
-                    <li class='dado'>
-                        <div class='texto nome'>{$usuario['nome']}</div>
-                        <div class='texto cpf'>{$usuario['cpf']}</div>
-                        <div class='texto email'>{$usuario['email']}</div>
-                        <div class='texto data'>{$usuario['data_criacao']}</div>
-                        <div class='texto status'>{$usuario['status']}</div>
-                        <div class='editar'><a href='form.php'><img src='images/editar.svg'></a></div>
-                        <div class='deletar'><img src='images/deletar.svg'></div>
-                    </li>
-                ";
-         }   
-?>
+            <li class='titulo'>
+                <div class='texto nome'>Nome</div>
+                <div class='texto cpf'>CPF</div>
+                <div class='texto email'>E-MAIL</div>
+                <div class='texto data'>DATA</div>
+                <div class='texto status'>STATUS</div>
+                <div class='editar'></div>
+                <div class='deletar'></div>
+            </li>
+            <?php
+                include_once './server/functions.php';
+                $usuarios = listarUsuarios();
+                foreach($usuarios as $usuario) {
+                    echo "
+                        <li class='dado'>
+                            <div class='texto nome'>{$usuario['nome']}</div>
+                            <div class='texto cpf'>{$usuario['cpf']}</div>
+                            <div class='texto email'>{$usuario['email']}</div>
+                            <div class='texto data'>{$usuario['data_criacao']}</div>
+                            <div class='texto status'>{$usuario['status']}</div>
+                            <div class='editar'>
+                                <a href='form.php?id={$usuario['id']}&cpf={$usuario['cpf']}&nome={$usuario['nome']}&email={$usuario['email']}&dataCriacao={$usuario['data_criacao']}&status={$usuario['status']}&senha={$usuario['senha']}&permissao={$usuario['permissao']}'>
+                                    <img src='images/editar.svg'>
+                                </a>
+                            </div>
+                            <div class='deletar'>
+                                <a href='/index.php?requisicao=deletar&id={$usuario['id']}'>
+                                    <img src='images/deletar.svg'>
+                                </a>
+                                
+                            </div>
+                        </li>
+                    ";
+                }   
+            ?>
         </ul>
         <div class="pagina">
             <p class="resultado">4 resultados</p>
