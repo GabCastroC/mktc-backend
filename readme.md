@@ -8,36 +8,39 @@
 
 Você está livre para fazer qualquer alteração no projeto inicial.
 
-## Requisitos - o que será avaliado?
+## Funcionalidades - O que foi feito?
 
-- Escrita (PHP, MySql);
-- Padronização do código;
-- Organização e qualidade do código;
-- Estrutura, semântica e escalabilidade do projeto;
-- Segurança das informações;
-- Boas práticas;
+- Funcionalidades CRUD:
+  - Adicionar Usuário
+  - Editar Usuário existente
+  - Deletar Usuário
+  - Listagem de usuários
 
-Tente usar o mínimo possível de coisas prontas como bibliotecas, frameworks e etc, o teste já é para ver seu conhecimento nas linguagens, quanto mais código, mais podemos analisar.
 
-## Qual a nossa stack?
+## Tecnologias utilizadas
 
 Caso você tenha interesse em se aproximar da nossa Stack, usamos:
 
-- JavaScript ES6
-- Stylus;
-- Gulp para automatização de tarefas;
 - PHP 8.1
-- Vendor
 - GIT
 - Docker
+- MySqli para interface com o banco de dados
 
-**Ps.:** Caso queira usar nosso ambiente docker, basta configurar as portas no docker-compose.yml e executar docker-compose up -d para subir a rede e os containers
-
-## Como entregar o desafio?
+## Como subir o sistema?
 
 1. Faça um clone do repositório
-2. Faça as devidas alterações
-3. Suba as alterações para o GitHub em um repositório público
-4. Nos mande por e-mail o link do repositório
+2. Se necessário, alterar portas no arquivo docker-compose.yml em caso de portas conflitantes
+3. Executar o comando docker-compose up -d --build para subir os containers
 
-**Ps.:** Caso precise de configuração para rodar o projeto após entregue, você precisa deixar claro todos os passos.
+## Minhas Dificuldades
+- Utilização do PHP direto no HTML foi novidade e um desafio pra mim, nunca havia trabalhado dessa forma.
+- Configuração do Docker para habilitar extensão do MySqli (minha solução foi criar um Dockerfile para fazer essa adaptação)
+- Manipulação e compreensão de branchs no GIT
+- Apresentação de dados do usuário no formulário de edição
+
+## Possíveis features futuras
+- Fluxo de login
+- Encriptação de senha
+- Formatação de dados na listagem (ex.: CPF)
+- Detalhamento de dados do usuário (modal)
+- Paginação de listagem
